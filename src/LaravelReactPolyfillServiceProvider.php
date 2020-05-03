@@ -2,7 +2,10 @@
 
 namespace MorningTrain\Laravel\React\Polyfill;
 
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use MorningTrain\Laravel\Context\Events\ContextsBooting;
+use MorningTrain\Laravel\Context\Context;
 
 class LaravelReactPolyfillServiceProvider extends ServiceProvider
 {
@@ -23,7 +26,21 @@ class LaravelReactPolyfillServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        
+
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../public/mix-manifest.json' => public_path('vendor/laravel-react-polyfill/mix-manifest.json'),
+                __DIR__ . '/../public/polyfill.js' => public_path('vendor/laravel-react-polyfill/polyfill.js'),
+                __DIR__ . '/../public/polyfill.js.map' => public_path('vendor/laravel-react-polyfill/polyfill.js.map'),
+            ], 'react-polyfill');
+        }
+
+        Event::listen(ContextsBooting::class, function ($event) {
+            Context::scripts([
+                asset(mix('/polyfill.js', 'vendor/laravel-react-polyfill'))
+            ]);
+        });
+
     }
 
 }
