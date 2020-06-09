@@ -36,6 +36,19 @@ class LaravelReactPolyfillServiceProvider extends ServiceProvider
         }
 
         Event::listen(ContextsBooting::class, function ($event) {
+
+            if(!Browser::supportsES5()) {
+                dd('does not support es5');
+            }
+
+            if(Browser::isEvergreen()) {
+                dd('evergreen');
+            }
+
+            if(Browser::isLegacy()) {
+                dd('legacy');
+            }
+
             Context::scripts([
                 asset(mix('/polyfill.js', 'vendor/laravel-react-polyfill'))
             ]);
