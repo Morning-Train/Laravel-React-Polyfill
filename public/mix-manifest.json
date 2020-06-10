@@ -1,4 +1,10 @@
 {
     "/polyfill.js": "/polyfill.js?id=b310d407d74570c4f968",
-    "/polyfill.js.map": "/polyfill.js.map?id=5b9de908bff6c702db03"
+    "/polyfill.js.map": "/polyfill.js.map?id=ffb2e231ae7646ecd134",
+    "/polyfill-es5.js": "/polyfill-es5.js?id=2da1cb67f270a17afc4d",
+    "/polyfill-es5.js.map": "/polyfill-es5.js.map?id=6c66ae8677e7946e2ade",
+    "/polyfill-es6.js": "/polyfill-es6.js?id=30fcd98e71b9715a2a80",
+    "/polyfill-es6.js.map": "/polyfill-es6.js.map?id=8c7e18787c5d6db5ffc8",
+    "/polyfill-next.js": "/polyfill-next.js?id=ae3ff3a2dcb9327421ee",
+    "/polyfill-next.js.map": "/polyfill-next.js.map?id=7c5b6db080bd63b4266d"
 }

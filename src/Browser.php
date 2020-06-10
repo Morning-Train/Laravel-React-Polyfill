@@ -21,42 +21,57 @@ class Browser extends Parser
             return true;
         }
 
+        if(static::isOperaMini()) {
+            return false;
+        }
+
+        if(!static::isEvergreen()) {
+            return false;
+        }
+
         return true;
     }
 
     public static function supportsES5()
     {
+        if(static::isEvergreen()) {
+            return true;
+        }
+
         if (static::isIE() && static::browserVersion() <= 9) {
+            return false;
+        }
+
+        if(static::isEdge()) {
+            return true;
+        }
+
+        if(static::isOperaMini()) {
             return false;
         }
 
         return true;
     }
 
-    public static function isLegacy()
+    public static function isOperaMini()
     {
-        if (static::isEvergreen()) {
-            return false;
-        }
-
-        if (static::isIe()) {
-            return true;
-        }
-
-        return false;
+        return static::isOpera() && static::isMobile();
     }
 
     public static function isEvergreen()
     {
-        if (static::isChrome()) {
+        if (static::isChrome() && static::browserVersion() >= 51) {
             return true;
         }
 
-        if (static::isFirefox()) {
+        if (static::isFirefox() && static::browserVersion() >= 54) {
+            return true;
+        }
+        if (static::isEdge() && static::browserVersion() >= 79) {
             return true;
         }
 
-        if (static::isOpera()) {
+        if (static::isOpera() && !static::isMobile()) {
             return true;
         }
 

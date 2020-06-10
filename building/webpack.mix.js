@@ -15,5 +15,8 @@ const mix = require('laravel-mix');
 mix.webpackConfig(require('./webpack.config'));
 mix.setPublicPath('../public');
 mix.react('resources/js/polyfill.js', '../public')
+mix.react('resources/js/polyfill-es5.js', '../public')
+mix.react('resources/js/polyfill-es6.js', '../public')
+mix.react('resources/js/polyfill-next.js', '../public')
     .version()
     .sourceMaps();

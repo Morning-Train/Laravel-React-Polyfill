@@ -32,25 +32,31 @@ class LaravelReactPolyfillServiceProvider extends ServiceProvider
                 __DIR__ . '/../public/mix-manifest.json' => public_path('vendor/laravel-react-polyfill/mix-manifest.json'),
                 __DIR__ . '/../public/polyfill.js' => public_path('vendor/laravel-react-polyfill/polyfill.js'),
                 __DIR__ . '/../public/polyfill.js.map' => public_path('vendor/laravel-react-polyfill/polyfill.js.map'),
+                __DIR__ . '/../public/polyfill-es5.js' => public_path('vendor/laravel-react-polyfill/polyfill-es5.js'),
+                __DIR__ . '/../public/polyfill-es5.js.map' => public_path('vendor/laravel-react-polyfill/polyfill-es5.js.map'),
+                __DIR__ . '/../public/polyfill-es6.js' => public_path('vendor/laravel-react-polyfill/polyfill-es6.js'),
+                __DIR__ . '/../public/polyfill-es6.js.map' => public_path('vendor/laravel-react-polyfill/polyfill-es6.js.map'),
+                __DIR__ . '/../public/polyfill-next.js' => public_path('vendor/laravel-react-polyfill/polyfill-next.js'),
+                __DIR__ . '/../public/polyfill-next.js.map' => public_path('vendor/laravel-react-polyfill/polyfill-next.js.map'),
             ], 'react-polyfill');
         }
 
         Event::listen(ContextsBooting::class, function ($event) {
 
             if(!Browser::supportsES5()) {
-                dd('does not support es5');
+                Context::scripts([
+                    asset(mix('/polyfill-es5.js', 'vendor/laravel-react-polyfill'))
+                ]);
             }
 
-            if(Browser::isEvergreen()) {
-                dd('evergreen');
-            }
-
-            if(Browser::isLegacy()) {
-                dd('legacy');
+            if(!Browser::supportsES6()) {
+                Context::scripts([
+                    asset(mix('/polyfill-es6.js', 'vendor/laravel-react-polyfill'))
+                ]);
             }
 
             Context::scripts([
-                asset(mix('/polyfill.js', 'vendor/laravel-react-polyfill'))
+                asset(mix('/polyfill-next.js', 'vendor/laravel-react-polyfill'))
             ]);
         });
 

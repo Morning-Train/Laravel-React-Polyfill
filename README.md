@@ -10,7 +10,7 @@ Install using composer
 
 After update or installation, publish recent assets to the public directory
 
-`php artisan vendor:publish --tag=react-polyfill`
+`php artisan vendor:publish --tag=react-polyfill --force`
 
 # Credits
 This package is developed and actively maintained by [Morningtrain](https://morningtrain.dk).
