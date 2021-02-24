@@ -2,9 +2,9 @@
 
 namespace MorningTrain\Laravel\React\Polyfill;
 
-use hisorange\BrowserDetect\Parser;
+use hisorange\BrowserDetect\Facade as BrowserDetect;
 
-class Browser extends Parser
+class Browser
 {
 
     public static function supportsES6()
@@ -76,6 +76,11 @@ class Browser extends Parser
         }
 
         return false;
+    }
+
+    public static function __callStatic($name, $arguments)
+    {
+        return call_user_func_array([BrowserDetect::class, $name], $arguments);
     }
 
 }
