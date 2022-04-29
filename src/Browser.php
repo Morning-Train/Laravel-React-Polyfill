@@ -78,6 +78,16 @@ class Browser
         return false;
     }
 
+    public static function isMobile()
+    {
+        return BrowserDetect::isMobile();
+    }
+
+    public static function isTablet()
+    {
+        return BrowserDetect::isTablet();
+    }
+
     public static function __callStatic($name, $arguments)
     {
         return call_user_func_array([BrowserDetect::class, $name], $arguments);
